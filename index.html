@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CosmoStars | コスプレ・アニメカルチャーエンターテイメント</title>
+  <meta name="description" content="CosmoStarsはコスプレ・アニメカルチャーに特化したエンターテイメント企業です。個性豊かなコスプレタレントのプロデュース、オリジナルグッズ販売、イベント開催などを行っています。">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff7bac;
+      --secondary: #ffafd1;
+      --accent: #ff5c95;
+      --light: #fff8fa;
+      --dark: #575757;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+    }
+    
+    /* Ensure these sections are always visible */
+    #guide, #supporter, #news, #goods, #talent, #about {
+      visibility: visible !important;
+      opacity: 1 !important;
+      display: block !important;
+    }
+    
+    /* When hidden sections are children elements */
+    #guide *, #supporter *, #news *, #goods *, #talent *, #about * {
+      visibility: visible !important;
+    }
+    
+    /* Make all cards visible */
+    .card, .talent-card, .news-card {
+      visibility: visible !important;
+      display: block !important;
+      opacity: 1 !important;
+    }
+    
+    /* Ensure all elements with hidden class are visible */
+    .hidden {
+      /* display: block !important; */
+      visibility: visible !important;
+    }
+    
+    /* Make mobile menu visible when needed */
+    .md\:hidden {
+      /* display: block !important; */
+    }
+    
+    /* Custom cursor visibility */
+    .custom-cursor {
+      display: block !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', 'M PLUS Rounded 1c', sans-serif;
+    }
+    
+    .font-en {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .bg-primary {
+      background-color: var(--primary);
+    }
+    
+    .bg-secondary {
+      background-color: var(--secondary);
+    }
+    
+    .bg-accent {
+      background-color: var(--accent);
+    }
+    
+    .bg-light {
+      background-color: var(--light);
+    }
+    
+    .text-primary {
+      color: var(--primary);
+    }
+    
+    .text-accent {
+      color: var(--accent);
+    }
+    
+    .border-primary {
+      border-color: var(--primary);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 123, 172, 0.9), rgba(255, 175, 209, 0.7));
+      opacity: 0.6;
+    }
+    
+    .section-heading {
+      display: inline-block;
+      position: relative;
+      font-weight: 700;
+      padding-bottom: 0.5rem;
+    }
+    
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    
+    .card {
+      transition: all 0.3s ease;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .talent-card {
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+      height: 350px;
+    }
+    
+    .talent-card:hover .talent-info {
+      opacity: 1;
+    }
+    
+    .talent-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .news-card {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .news-date {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.5rem 0.75rem;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .circle-decoration {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      opacity: 0.1;
+      z-index: -1;
+    }
+    
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      overflow-y: auto;
+    }
+    
+    .modal-content {
+      position: relative;
+      background-color: white;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fadeIn {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 30;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background-color: white;
+      transition: all 0.3s ease;
+      z-index: 40;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mobile-menu.active {
+      right: 0;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 35;
+    }
+    
+    /* Animation classes for scrolling effects */
+    .hidden {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    
+    .show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .staggered {
+      transition-delay: var(--delay);
+    }
+    
+    /* Custom cursor */
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      z-index: 9999;
+      opacity: 0.6;
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
+    }
+    
+    .cursor-active {
+      width: 50px;
+      height: 50px;
+      opacity: 0.4;
+    }
+    
+    /* Decorative Elements */
+    .dot-pattern {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-image: radial-gradient(var(--primary) 2px, transparent 2px);
+      background-size: 20px 20px;
+      opacity: 0.2;
+      z-index: -1;
+    }
+    
+    .wave-decoration {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      z-index: -1;
+    }
+    
+    /* Social Media Icons */
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+      background-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor hidden md:block"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar-fixed py-4 px-6 flex items-center justify-between bg-white">
+    <div class="flex items-center">
+      <a href="#" class="flex items-center">
+        <span class="text-2xl font-bold text-primary mr-2">⋆</span>
+        <span class="text-2xl font-bold">CosmoStars</span>
+      </a>
+    </div>
+    
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="#about" class="hover:text-primary transition-colors">ABOUT</a>
+      <a href="#talent" class="hover:text-primary transition-colors">TALENT</a>
+      <a href="#goods" class="hover:text-primary transition-colors">GOODS</a>
+      <a href="#news" class="hover:text-primary transition-colors">NEWS</a>
+      <a href="#guide" class="hover:text-primary transition-colors">GUIDE</a>
+      <a href="#supporter" class="hover:text-primary transition-colors">SUPPORTER</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full">CONTACT</a>
+    </div>
+    
+    <div class="md:hidden">
+      <button id="menu-toggle" class="text-2xl focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu p-8">
+    <div class="flex justify-end mb-8">
+      <button id="menu-close" class="text-2xl focus:outline-none">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="flex flex-col space-y-6">
+      <a href="#about" class="text-xl hover:text-primary transition-colors">ABOUT</a>
+      <a href="#talent" class="text-xl hover:text-primary transition-colors">TALENT</a>
+      <a href="#goods" class="text-xl hover:text-primary transition-colors">GOODS</a>
+      <a href="#news" class="text-xl hover:text-primary transition-colors">NEWS</a>
+      <a href="#guide" class="text-xl hover:text-primary transition-colors">GUIDE</a>
+      <a href="#supporter" class="text-xl hover:text-primary transition-colors">SUPPORTER</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-center mt-4">CONTACT</a>
+    </div>
+    
+    <div class="absolute bottom-8 left-8 flex space-x-4">
+      <a href="#" class="social-icon">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#" class="social-icon">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="social-icon">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+  </div>
+  
+  <div class="overlay"></div>
+  
+  <!-- Hero Section -->
+  <header class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="hero-overlay"></div>
+    <video autoplay muted loop playsinline class="absolute w-full h-full object-cover">
+      <source src="./videos/cospre_top_video.mp4" type="video/mp4">
+    </video>
+    <div class="container mx-auto px-6 relative z-10 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-fadeIn" style="animation-delay: 0.3s;">
+        新しい自分と、<br>新しい物語を。
+      </h1>
+      <p class="text-xl md:text-2xl text-white mb-8 animate-fadeIn" style="animation-delay: 0.6s;">
+        コスプレでつながる世界へようこそ
+      </p>
+      <div class="animate-fadeIn" style="animation-delay: 0.9s;">
+        <a href="#about" class="btn-primary px-8 py-3 rounded-full text-lg inline-block">
+          <i class="fas fa-star mr-2"></i> Discover
+        </a>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-10 left-0 w-full text-center z-10">
+      <a href="#about" class="text-white animate-bounce inline-block">
+        <i class="fas fa-chevron-down text-2xl"></i>
+      </a>
+    </div>
+  </header>
+  
+  <!-- About Section -->
+  <section id="about" class="py-20 relative overflow-hidden">
+    <div class="circle-decoration top-0 right-0"></div>
+    <div class="dot-pattern top-20 left-10"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">ABOUT</h2>
+      </div>
+      
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <div class="relative">
+            <img src="./images/hero.jpeg" alt="コスプレイヤー集合写真" class="rounded-lg shadow-lg">
+            <div class="absolute -bottom-5 -right-5 bg-primary rounded-lg shadow-lg p-6 w-48">
+              <p class="text-white font-bold">2018年設立</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="md:w-full md:pl-12">
+          <h3 class="text-3xl font-bold mb-6 text-primary">コスプレの魅力を世界へ</h3>
+          <p class="text-lg mb-6 leading-relaxed">
+            CosmoStarsは、コスプレやアニメカルチャーを愛する全ての人に新しい表現の場を提供するエンターテイメント企業です。
+          </p>
+          <p class="text-lg mb-6 leading-relaxed">
+            私たちは「コスプレで人生を彩る」をミッションに掲げ、一人ひとりが自分らしく輝ける場所と瞬間を創出します。所属タレントのプロデュースから、オリジナルグッズの企画・販売、各種イベントの開催まで、コスプレとアニメカルチャーの素晴らしさを多角的に発信しています。
+          </p>
+          <p class="text-lg mb-8 leading-relaxed">
+            キャラクターになりきることで見つかる新しい自分。その無限の可能性を、私たちと一緒に探してみませんか？
+          </p>
+          
+          <div class="flex flex-wrap gap-6">
+            <div class="bg-light rounded-lg p-6 shadow-sm border border-primary flex-1 min-w-[240px]">
+              <div class="text-primary text-4xl mb-4">
+                <i class="fas fa-users"></i>
+              </div>
+              <h4 class="text-xl font-bold mb-2">コスプレタレント</h4>
+              <p>個性豊かなコスプレイヤーが多数所属。イベント出演やメディア活動を展開。</p>
+            </div>
+            
+            <div class="bg-light rounded-lg p-6 shadow-sm border border-primary flex-1 min-w-[240px]">
+              <div class="text-primary text-4xl mb-4">
+                <i class="fas fa-store"></i>
+              </div>
+              <h4 class="text-xl font-bold mb-2">グッズ製作</h4>
+              <p>クオリティにこだわったコスプレ衣装や関連グッズの企画・製作・販売。</p>
+            </div>
+            
+            <div class="bg-light rounded-lg p-6 shadow-sm border border-primary flex-1 min-w-[240px]">
+              <div class="text-primary text-4xl mb-4">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <h4 class="text-xl font-bold mb-2">イベント開催</h4>
+              <p>コスプレイベントの企画運営から、各種メディアとのコラボレーション。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Talent Section -->
+  <section id="talent" class="py-20 bg-light relative">
+    <div class="circle-decoration bottom-0 left-0"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">TALENT</h2>
+        <p class="text-lg max-w-2xl mx-auto">個性豊かな所属コスプレイヤーたち。それぞれが独自の世界観を持ち、様々な活動を展開しています。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Talent 1 -->
+        <div class="talent-card card">
+          <img src="./images/sakura.jpeg" alt="桜花 舞" class="w-full h-full object-cover">
+          <div class="talent-info text-white">
+            <h3 class="text-xl font-bold">桜花 舞</h3>
+            <p class="mb-2">Sakura Mai</p>
+            <button class="view-talent-details bg-white text-primary px-3 py-1 rounded-full text-sm" data-talent="talent1">詳細を見る</button>
+          </div>
+        </div>
+        
+        <!-- Talent 2 -->
+        <div class="talent-card card">
+          <img src="./images/tsuki.jpeg" alt="月影 レン" class="w-full h-full object-cover">
+          <div class="talent-info text-white">
+            <h3 class="text-xl font-bold">月影 レン</h3>
+            <p class="mb-2">Tsukikage Ren</p>
+            <button class="view-talent-details bg-white text-primary px-3 py-1 rounded-full text-sm" data-talent="talent2">詳細を見る</button>
+          </div>
+        </div>
+        
+        <!-- Talent 3 -->
+        <div class="talent-card card">
+          <img src="https://images.unsplash.com/photo-1627672360124-4ed09583e14c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="星野 ミク" class="w-full h-full object-cover">
+          <div class="talent-info text-white">
+            <h3 class="text-xl font-bold">星野 ミク</h3>
+            <p class="mb-2">Hoshino Miku</p>
+            <button class="view-talent-details bg-white text-primary px-3 py-1 rounded-full text-sm" data-talent="talent3">詳細を見る</button>
+          </div>
+        </div>
+        
+        <!-- Talent 4 -->
+        <div class="talent-card card">
+          <img src="./images/aozora.jpeg" alt="蒼井 ハルト" class="w-full h-full object-cover">
+          <div class="talent-info text-white">
+            <h3 class="text-xl font-bold">蒼井 ハルト</h3>
+            <p class="mb-2">Aoi Haruto</p>
+            <button class="view-talent-details bg-white text-primary px-3 py-1 rounded-full text-sm" data-talent="talent4">詳細を見る</button>
+          </div>
+        </div>
+        
+        <!-- Talent 5 -->
+        <div class="talent-card card">
+          <img src="./images/kouyou.jpeg" alt="紅葉 アキラ" class="w-full h-full object-cover">
+          <div class="talent-info text-white">
+            <h3 class="text-xl font-bold">紅葉 アキラ</h3>
+            <p class="mb-2">Momiji Akira</p>
+            <button class="view-talent-details bg-white text-primary px-3 py-1 rounded-full text-sm" data-talent="talent5">詳細を見る</button>
+          </div>
+        </div>
+        
+        <!-- Talent 6 -->
+        <div class="talent-card card">
+          <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="緋咲 ユウ" class="w-full h-full object-cover">
+          <div class="talent-info text-white">
+            <h3 class="text-xl font-bold">緋咲 ユウ</h3>
+            <p class="mb-2">Hisaki Yuu</p>
+            <button class="view-talent-details bg-white text-primary px-3 py-1 rounded-full text-sm" data-talent="talent6">詳細を見る</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="#" class="btn-outline px-6 py-3 rounded-full inline-block">
+          タレント一覧を見る <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Goods Section -->
+  <section id="goods" class="py-20 relative">
+    <div class="dot-pattern bottom-20 right-10"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">GOODS</h2>
+        <p class="text-lg max-w-2xl mx-auto">クオリティにこだわったコスプレグッズや関連商品を取り揃えています。</p>
+      </div>
+      
+      <div class="flex overflow-x-auto pb-8 space-x-6 snap-x">
+        <!-- Goods Category 1 -->
+        <div class="min-w-[300px] card flex-shrink-0 snap-center">
+          <div class="bg-light rounded-lg overflow-hidden shadow-md">
+            <img src="./images/cospre_dress.jpeg" alt="コスプレ衣装" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">コスプレ衣装</h3>
+              <p class="mb-4">クオリティにこだわった本格的なコスプレ衣装を多数取り揃えています。</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                商品を見る <i class="fas fa-external-link-alt ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Goods Category 2 -->
+        <div class="min-w-[300px] card flex-shrink-0 snap-center">
+          <div class="bg-light rounded-lg overflow-hidden shadow-md">
+            <img src="./images/wig.jpeg" alt="ウィッグ" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">ウィッグ</h3>
+              <p class="mb-4">自然な見た目と着け心地を追求した高品質なウィッグコレクション。</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                商品を見る <i class="fas fa-external-link-alt ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Goods Category 3 -->
+        <div class="min-w-[300px] card flex-shrink-0 snap-center">
+          <div class="bg-light rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1583484963886-cfe2bff2945f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="写真集" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">写真集</h3>
+              <p class="mb-4">所属タレントのオリジナル写真集やデジタルコンテンツを販売中。</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                商品を見る <i class="fas fa-external-link-alt ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Goods Category 4 -->
+        <div class="min-w-[300px] card flex-shrink-0 snap-center">
+          <div class="bg-light rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1583846717393-dc2412c95ed7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="アクセサリー" class="w-full h-48 object-cover">
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">アクセサリー</h3>
+              <p class="mb-4">コスプレを彩る小物や小道具。細部までこだわったアイテム。</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                商品を見る <i class="fas fa-external-link-alt ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 bg-light p-8 rounded-lg shadow-md">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
+            <h3 class="text-2xl font-bold mb-4">BOOTH公式ショップ</h3>
+            <p class="mb-4">オリジナルグッズやコスプレアイテムをBOOTHにて販売中。限定商品も多数取り扱っています。</p>
+            <a href="#" class="btn-primary px-6 py-2 rounded-full inline-block">
+              ショップを見る <i class="fas fa-shopping-cart ml-2"></i>
+            </a>
+          </div>
+          
+          <div class="md:w-1/3 text-center">
+            <iframe src="https://embed.booth.pm/items/random" class="w-full h-64 rounded-lg shadow-sm"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- News Section -->
+  <section id="news" class="py-20 bg-light relative">
+    <div class="circle-decoration top-20 right-20"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">NEWS</h2>
+        <p class="text-lg max-w-2xl mx-auto">最新情報やイベント出演情報、新商品リリースなどをお知らせします。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- News Item 1 -->
+        <div class="news-card card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="コミックマーケット出展" class="w-full h-48 object-cover">
+              <div class="news-date">2023.09.15</div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">コミックマーケット出展決定！</h3>
+              <p class="mb-4">12月30日・31日に開催されるコミックマーケットC103に出展します。新作グッズも販売予定！</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                詳細を見る <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- News Item 2 -->
+        <div class="news-card card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="新人コスプレイヤー加入" class="w-full h-48 object-cover">
+              <div class="news-date">2023.08.30</div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">新人コスプレイヤー加入のお知らせ</h3>
+              <p class="mb-4">この度、新たに2名のコスプレイヤーが当社に加入しました。今後の活動にご期待ください。</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                詳細を見る <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- News Item 3 -->
+        <div class="news-card card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1627672360124-4ed09583e14c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="写真集発売" class="w-full h-48 object-cover">
+              <div class="news-date">2023.08.10</div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">星野ミク写真集発売決定</h3>
+              <p class="mb-4">星野ミク初のソロ写真集「Starlight」が9月20日に発売決定。先行予約受付中！</p>
+              <a href="#" class="text-primary font-bold flex items-center">
+                詳細を見る <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="#" class="btn-outline px-6 py-3 rounded-full inline-block">
+          ニュース一覧を見る <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Guide Section -->
+  <section id="guide" class="py-20 relative">
+    <div class="dot-pattern top-20 left-10"></div>
+    <div class="circle-decoration bottom-0 right-0"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">GUIDE</h2>
+        <p class="text-lg max-w-2xl mx-auto">撮影依頼や衣装レンタル、コラボレーションなど、各種ガイドラインをご確認ください。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Guide Item 1 -->
+        <div class="card">
+          <div class="bg-light rounded-lg p-8 shadow-md border border-primary">
+            <div class="flex items-center mb-6">
+              <div class="text-primary text-3xl mr-4">
+                <i class="fas fa-camera"></i>
+              </div>
+              <h3 class="text-2xl font-bold">撮影依頼ガイドライン</h3>
+            </div>
+            <p class="mb-6">所属タレントへの撮影依頼に関するルールや料金体系、注意事項などを掲載しています。商業利用の場合は必ず事前にご相談ください。</p>
+            <a href="#" class="btn-primary px-6 py-2 rounded-full inline-block">
+              詳細を見る
+            </a>
+          </div>
+        </div>
+        
+        <!-- Guide Item 2 -->
+        <div class="card">
+          <div class="bg-light rounded-lg p-8 shadow-md border border-primary">
+            <div class="flex items-center mb-6">
+              <div class="text-primary text-3xl mr-4">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <h3 class="text-2xl font-bold">衣装レンタルについて</h3>
+            </div>
+            <p class="mb-6">所有する衣装の一部はレンタルも承っております。サイズや貸出期間、料金、取り扱いに関する注意事項についてご案内します。</p>
+            <a href="#" class="btn-primary px-6 py-2 rounded-full inline-block">
+              詳細を見る
+            </a>
+          </div>
+        </div>
+        
+        <!-- Guide Item 3 -->
+        <div class="card">
+          <div class="bg-light rounded-lg p-8 shadow-md border border-primary">
+            <div class="flex items-center mb-6">
+              <div class="text-primary text-3xl mr-4">
+                <i class="fas fa-copyright"></i>
+              </div>
+              <h3 class="text-2xl font-bold">二次創作ガイドライン</h3>
+            </div>
+            <p class="mb-6">所属タレントに関するファンアートやコスプレ、二次創作物の制作・公開に関するガイドラインです。著作権に配慮した活動をお願いします。</p>
+            <a href="#" class="btn-primary px-6 py-2 rounded-full inline-block">
+              詳細を見る
+            </a>
+          </div>
+        </div>
+        
+        <!-- Guide Item 4 -->
+        <div class="card">
+          <div class="bg-light rounded-lg p-8 shadow-md border border-primary">
+            <div class="flex items-center mb-6">
+              <div class="text-primary text-3xl mr-4">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h3 class="text-2xl font-bold">コラボレーション・仕事依頼</h3>
+            </div>
+            <p class="mb-6">企業様からのコラボレーションや広告出演などのお仕事依頼に関するご案内です。案件の種類や所属タレントによって対応が異なります。</p>
+            <a href="#" class="btn-primary px-6 py-2 rounded-full inline-block">
+              詳細を見る
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Supporter Section -->
+  <section id="supporter" class="py-20 bg-light relative">
+    <div class="dot-pattern top-20 right-10"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">SUPPORTER</h2>
+        <p class="text-lg max-w-2xl mx-auto">CosmoStarsを支えてくれる素晴らしいクリエイターやサポーターをご紹介します。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <!-- Supporter 1 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="佐藤 アキラ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">佐藤 アキラ</h3>
+              <p class="text-sm text-gray-600 mb-2">イラストレーター</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 2 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1596079890744-c1a0462d0975?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="鈴木 ミカ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">鈴木 ミカ</h3>
+              <p class="text-sm text-gray-600 mb-2">衣装デザイナー</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 3 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1603574670812-d24560880210?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="高橋 ヒロト" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">高橋 ヒロト</h3>
+              <p class="text-sm text-gray-600 mb-2">フォトグラファー</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 4 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="./images/make_artist.jpeg" alt="山田 ユウキ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">山田 ユウキ</h3>
+              <p class="text-sm text-gray-600 mb-2">メイクアーティスト</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 5 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="./images/manga.jpeg" alt="中村 エミ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">中村 エミ</h3>
+              <p class="text-sm text-gray-600 mb-2">マンガ家</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 6 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="./images/producer.jpeg" alt="木村 タクミ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">木村 タクミ</h3>
+              <p class="text-sm text-gray-600 mb-2">音楽プロデューサー</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 7 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="田中 ハナ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">田中 ハナ</h3>
+              <p class="text-sm text-gray-600 mb-2">小物アーティスト</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Supporter 8 -->
+        <div class="card">
+          <div class="bg-white rounded-lg overflow-hidden shadow-md">
+            <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="小林 リョウ" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-bold mb-1">小林 リョウ</h3>
+              <p class="text-sm text-gray-600 mb-2">動画クリエイター</p>
+              <div class="flex space-x-2">
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-primary hover:text-accent">
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 bg-white p-8 rounded-lg shadow-md">
+        <h3 class="text-2xl font-bold mb-6 text-center">サポーター・クリエイター募集</h3>
+        <p class="text-center mb-8">CosmoStarsでは、一緒に活動してくれるクリエイターやサポーターを随時募集しています。<br>イラスト、衣装制作、メイク、写真撮影など、あなたのスキルを活かしてみませんか？</p>
+        <div class="text-center">
+          <a href="#contact" class="btn-primary px-6 py-3 rounded-full inline-block">
+            応募してみる <i class="fas fa-paper-plane ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 relative">
+    <div class="circle-decoration bottom-0 left-0"></div>
+    
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4 section-heading inline-block">CONTACT</h2>
+        <p class="text-lg max-w-2xl mx-auto">お仕事のご依頼やご質問など、お気軽にお問い合わせください。</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto bg-light p-8 rounded-lg shadow-md">
+        <form id="contact-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">お名前 <span class="text-accent">*</span></label>
+              <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">メールアドレス <span class="text-accent">*</span></label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+            </div>
+          </div>
+          
+          <div>
+            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">件名 <span class="text-accent">*</span></label>
+            <input type="text" id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">メッセージ <span class="text-accent">*</span></label>
+            <textarea id="message" name="message" rows="6" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+          </div>
+          
+          <div class="flex items-start">
+            <input type="checkbox" id="privacy" name="privacy" required class="mt-1 mr-2">
+            <label for="privacy" class="text-sm">プライバシーポリシーに同意します。 <a href="#" class="text-primary hover:underline">プライバシーポリシーを読む</a></label>
+          </div>
+          
+          <div class="text-center">
+            <button type="submit" class="btn-primary px-8 py-3 rounded-full">
+              送信する <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="text-primary text-3xl mb-4">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">所在地</h3>
+          <p>〒150-0002<br>東京都渋谷区渋谷1-1-1<br>CosmoStarsビル 5F</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="text-primary text-3xl mb-4">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">電話番号</h3>
+          <p>03-1234-5678<br>（平日 10:00〜18:00）</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="text-primary text-3xl mb-4">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">メールアドレス</h3>
+          <p>info@cosmostars.example.com<br>contact@cosmostars.example.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-primary text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="mb-8 md:mb-0">
+          <a href="#" class="flex items-center mb-4">
+            <span class="text-3xl font-bold mr-2">⋆</span>
+            <span class="text-2xl font-bold">CosmoStars</span>
+          </a>
+          <p class="max-w-md mb-6">コスプレとアニメカルチャーで新しい世界をつくる。CosmoStarsは、コスプレイヤーのプロデュースからグッズ制作、イベント開催まで幅広く展開するエンターテイメント企業です。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="social-icon bg-white text-primary">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon bg-white text-primary">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon bg-white text-primary">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="#" class="social-icon bg-white text-primary">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div>
+            <h4 class="text-lg font-bold mb-4">サイトマップ</h4>
+            <ul class="space-y-2">
+              <li><a href="#about" class="hover:text-white/70 transition-colors">ABOUT</a></li>
+              <li><a href="#talent" class="hover:text-white/70 transition-colors">TALENT</a></li>
+              <li><a href="#goods" class="hover:text-white/70 transition-colors">GOODS</a></li>
+              <li><a href="#news" class="hover:text-white/70 transition-colors">NEWS</a></li>
+              <li><a href="#guide" class="hover:text-white/70 transition-colors">GUIDE</a></li>
+              <li><a href="#supporter" class="hover:text-white/70 transition-colors">SUPPORTER</a></li>
+              <li><a href="#contact" class="hover:text-white/70 transition-colors">CONTACT</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-bold mb-4">ガイドライン</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-white/70 transition-colors">撮影依頼</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">衣装レンタル</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">二次創作</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">コラボレーション</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">プレゼント送付</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-bold mb-4">企業情報</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-white/70 transition-colors">会社概要</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">プライバシーポリシー</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">特定商取引法</a></li>
+              <li><a href="#" class="hover:text-white/70 transition-colors">採用情報</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 pt-8 border-t border-white/20 text-center">
+        <p>&copy; 2023 CosmoStars Inc. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Back to Top Button -->
+  <a href="#" id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+  
+  <!-- Talent Details Modal -->
+  <div id="talent-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="talent-details-content">
+        <!-- Content will be dynamically loaded here -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Back to Top Button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('opacity-100');
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+      } else {
+        backToTopButton.classList.remove('opacity-100');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const overlay = document.querySelector('.overlay');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      overlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+    
+    menuClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      overlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+    
+    overlay.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      overlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+    
+    // Scroll Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Talent Modal
+    const modal = document.getElementById('talent-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const talentDetailsContent = document.getElementById('talent-details-content');
+    const viewTalentButtons = document.querySelectorAll('.view-talent-details');
+    
+    const talentData = {
+      talent1: {
+        name: '桜花 舞',
+        nameEn: 'Sakura Mai',
+        image: 'https://images.unsplash.com/photo-1593485988082-ccc780db47df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        birthday: '4月3日',
+        height: '162cm',
+        specialty: 'ダンス、歌唱',
+        hobby: '料理、ゲーム、カラオケ',
+        bio: '2018年からコスプレ活動を開始。美少女系キャラクターからクールなキャラクターまで幅広く担当。ボーカロイドキャラクターのコスプレが特に人気で、SNSでの総フォロワー数は50万人を超える。雑誌の表紙やアニメイベントへの出演多数。2021年からCosmoStarsに所属。',
+        skills: ['メイク', '衣装制作', '歌唱', 'ダンス'],
+        socialMedia: {
+          twitter: 'https://twitter.com/',
+          instagram: 'https://instagram.com/',
+          youtube: 'https://youtube.com/'
+        },
+        gallery: [
+          'https://images.unsplash.com/photo-1593485988082-ccc780db47df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1578632292335-df3abbb0d586?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1578632767137-7192e365b3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      talent2: {
+        name: '月影 レン',
+        nameEn: 'Tsukikage Ren',
+        image: 'https://images.unsplash.com/photo-1611930022073-84f50cbd49da?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        birthday: '9月15日',
+        height: '175cm',
+        specialty: '写真撮影、小道具製作',
+        hobby: '映画鑑賞、ギター、読書',
+        bio: '2016年からコスプレ活動を開始。主に男性キャラクターを中心に活動し、特に刀剣や歴史系のキャラクターが得意。小道具の製作技術が高く、自作の小物が評価されている。写真撮影も行い、他コスプレイヤーの撮影も担当。2020年からCosmoStarsに所属。',
+        skills: ['小道具製作', '写真撮影', '特殊メイク', '戦闘シーン演技'],
+        socialMedia: {
+          twitter: 'https://twitter.com/',
+          instagram: 'https://instagram.com/',
+          booth: 'https://booth.pm/'
+        },
+        gallery: [
+          'https://images.unsplash.com/photo-1611930022073-84f50cbd49da?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1520975954732-35dd22299614?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1485290334039-a3c69043e517?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      talent3: {
+        name: '星野 ミク',
+        nameEn: 'Hoshino Miku',
+        image: 'https://images.unsplash.com/photo-1627672360124-4ed09583e14c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        birthday: '12月24日',
+        height: '158cm',
+        specialty: 'ダンス、メイク技術',
+        hobby: 'アニメ鑑賞、コスメ収集、イラスト',
+        bio: '2019年からコスプレ活動を開始。アイドル系キャラクターを中心に活動し、ダンスの技術を活かしたコスプレ動画が人気。メイク技術が高く、変身メイク動画も好評。デジタルコンテンツの制作にも積極的で、自身のコスプレ写真集も販売。2021年からCosmoStarsに所属。',
+        skills: ['変身メイク', 'コスプレダンス', 'デジタルコンテンツ制作', '衣装デザイン'],
+        socialMedia: {
+          twitter: 'https://twitter.com/',
+          instagram: 'https://instagram.com/',
+          tiktok: 'https://tiktok.com/'
+        },
+        gallery: [
+          'https://images.unsplash.com/photo-1627672360124-ed09583e14c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      talent4: {
+        name: '蒼井 ハルト',
+        nameEn: 'Aoi Haruto',
+        image: 'https://images.unsplash.com/photo-1608363808030-e08f586f51d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        birthday: '6月17日',
+        height: '180cm',
+        specialty: '演技力、ボイスアクティング',
+        hobby: '筋トレ、ゲーム実況、料理',
+        bio: '2017年からコスプレ活動を開始。アクション系や王道少年漫画の主人公を中心に活動。演技力が高く、キャラクターの再現度には定評がある。声の演技も可能で、コスプレ動画では自らキャラクターボイスを担当。筋肉質なボディラインを活かしたコスプレが特徴。2019年からCosmoStarsに所属。',
+        skills: ['アクション演技', 'ボイスアクティング', 'ボディメイク', '動画編集'],
+        socialMedia: {
+          twitter: 'https://twitter.com/',
+          instagram: 'https://instagram.com/',
+          youtube: 'https://youtube.com/'
+        },
+        gallery: [
+          'https://images.unsplash.com/photo-1608363808030-e08f586f51d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1475533784481-cadd107e2aea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      talent5: {
+        name: '紅葉 アキラ',
+        nameEn: 'Momiji Akira',
+        image: 'https://images.unsplash.com/photo-1576385585103-fa7e9240539e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        birthday: '10月31日',
+        height: '168cm',
+        specialty: '特殊メイク、造形',
+        hobby: 'ホラー映画鑑賞、ドローン撮影、クラフト',
+        bio: '2015年からコスプレ活動を開始。ゴシック系やダーク系キャラクターが得意で、特殊メイクの技術が高い。ゾンビやモンスターなどの造形メイクでも人気があり、ハロウィンイベントの常連。衣装や小道具の造形技術も評価されている。2018年からCosmoStarsに所属。',
+        skills: ['特殊メイク', '造形', '素材加工', 'ライティング'],
+        socialMedia: {
+          twitter: 'https://twitter.com/',
+          instagram: 'https://instagram.com/',
+          artstation: 'https://artstation.com/'
+        },
+        gallery: [
+          'https://images.unsplash.com/photo-1576385585103-fa7e9240539e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1597586124394-fbd6ef244026?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      talent6: {
+        name: '緋咲 ユウ',
+        nameEn: 'Hisaki Yuu',
+        image: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        birthday: '2月14日',
+        height: '165cm',
+        specialty: 'ヘアスタイリング、メイク',
+        hobby: 'カフェ巡り、旅行、ヨガ',
+        bio: '2020年からコスプレ活動を開始。女性らしいキャラクターから中性的なキャラクターまで幅広く担当。ウィッグスタイリングの技術が高く、複雑なヘアスタイルの再現に定評がある。メイク映えするコスプレが人気で、インスタグラムでのフォロワーが急増中。2022年からCosmoStarsに所属。',
+        skills: ['ウィッグスタイリング', 'ナチュラルメイク', 'ポージング', 'SNSマーケティング'],
+        socialMedia: {
+          twitter: 'https://twitter.com/',
+          instagram: 'https://instagram.com/',
+          tiktok: 'https://tiktok.com/'
+        },
+        gallery: [
+          'https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1518577915332-c2a19f149a75?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1514626585111-9aa86183ac98?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ]
+      }
+    };
+    
+    viewTalentButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const talentId = button.getAttribute('data-talent');
+        const talent = talentData[talentId];
+        
+        let galleryHTML = '';
+        talent.gallery.forEach(image => {
+          galleryHTML += `<div class="w-full md:w-1/3 p-2">
+            <img src="${image}" alt="${talent.name}" class="w-full h-48 object-cover rounded-lg">
+          </div>`;
+        });
+        
+        let skillsHTML = '';
+        talent.skills.forEach(skill => {
+          skillsHTML += `<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm mr-2 mb-2 inline-block">${skill}</span>`;
+        });
+        
+        let socialMediaHTML = '';
+        for (const [platform, url] of Object.entries(talent.socialMedia)) {
+          let icon = '';
+          switch (platform) {
+            case 'twitter':
+              icon = 'fa-twitter';
+              break;
+            case 'instagram':
+              icon = 'fa-instagram';
+              break;
+            case 'youtube':
+              icon = 'fa-youtube';
+              break;
+            case 'tiktok':
+              icon = 'fa-tiktok';
+              break;
+            case 'booth':
+              icon = 'fa-store';
+              break;
+            case 'artstation':
+              icon = 'fa-palette';
+              break;
+            default:
+              icon = 'fa-globe';
+          }
+          
+          socialMediaHTML += `<a href="${url}" target="_blank" class="social-icon bg-primary mr-2">
+            <i class="fab ${icon}"></i>
+          </a>`;
+        }
+        
+        talentDetailsContent.innerHTML = `
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/3">
+              <img src="${talent.image}" alt="${talent.name}" class="w-full h-auto rounded-lg">
+              
+              <div class="mt-6">
+                <h3 class="text-xl font-bold mb-4">プロフィール</h3>
+                <ul class="space-y-2">
+                  <li><span class="font-bold">誕生日:</span> ${talent.birthday}</li>
+                  <li><span class="font-bold">身長:</span> ${talent.height}</li>
+                  <li><span class="font-bold">特技:</span> ${talent.specialty}</li>
+                  <li><span class="font-bold">趣味:</span> ${talent.hobby}</li>
+                </ul>
+              </div>
+              
+              <div class="mt-6">
+                <h3 class="text-xl font-bold mb-4">スキル</h3>
+                <div class="flex flex-wrap">
+                  ${skillsHTML}
+                </div>
+              </div>
+              
+              <div class="mt-6">
+                <h3 class="text-xl font-bold mb-4">SNS</h3>
+                <div class="flex">
+                  ${socialMediaHTML}
+                </div>
+              </div>
+            </div>
+            
+            <div class="md:w-2/3">
+              <h2 class="text-3xl font-bold mb-2">${talent.name}</h2>
+              <p class="text-lg text-gray-600 mb-6">${talent.nameEn}</p>
+              
+              <div class="mb-8">
+                <h3 class="text-xl font-bold mb-4">プロフィール</h3>
+                <p class="leading-relaxed">${talent.bio}</p>
+              </div>
+              
+              <div>
+                <h3 class="text-xl font-bold mb-4">ギャラリー</h3>
+                <div class="flex flex-wrap -mx-2">
+                  ${galleryHTML}
+                </div>
+              </div>
+              
+              <div class="mt-8">
+                <a href="#" class="btn-primary px-6 py-2 rounded-full inline-block">
+                  仕事の依頼をする <i class="fas fa-paper-plane ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+    
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Contact Form Submission
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Here you would typically send the form data to a server
+      // For this example, we'll just show a success message
+      
+      const formData = new FormData(contactForm);
+      const formEntries = Object.fromEntries(formData.entries());
+      
+      contactForm.innerHTML = `
+        <div class="text-center py-8">
+          <div class="text-5xl text-primary mb-4">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-2">お問い合わせありがとうございます</h3>
+          <p class="mb-6">メッセージを受け付けました。担当者より順次ご連絡いたします。</p>
+          <button type="button" id="reset-form" class="btn-outline px-6 py-2 rounded-full">
+            フォームに戻る
+          </button>
+        </div>
+      `;
+      
+      document.getElementById('reset-form').addEventListener('click', () => {
+        window.location.reload();
+      });
+    });
+    
+    // Custom Cursor
+    const cursor = document.querySelector('.custom-cursor');
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    
+    document.querySelectorAll('a, button, input, textarea, .card, .talent-card').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        cursor.classList.add('cursor-active');
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-active');
+      });
+    });
+    
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        if (this.getAttribute('href') === '#') return;
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          // Close mobile menu if open
+          if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+          
+          window.scrollTo({
+            top: targetElement.offsetTop - 80, // Adjust for fixed header
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Helper function to check if element is in viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+    
+    // Add staggered animations
+    document.querySelectorAll('.card').forEach((card, index) => {
+      card.classList.add('hidden', 'staggered');
+      card.style.setProperty('--delay', `${index * 0.1}s`);
+    });
+    
+    // Initialize all animations
+    document.addEventListener('DOMContentLoaded', () => {
+      // Show all sections but animate their children
+      document.querySelectorAll('section').forEach(section => {
+        // Ensure the section itself is visible
+        section.classList.remove('hidden');
+        
+        // Only observe specific elements for animation
+        const animatedElements = section.querySelectorAll('.card, .talent-card, .section-heading, .social-icon');
+        animatedElements.forEach(el => {
+          // Only add hidden if not already hidden
+          if (!el.classList.contains('hidden')) {
+            el.classList.add('hidden');
+          }
+          observer.observe(el);
+        });
+      });
+      
+      // Force show any key elements after a delay if they didn't animate
+      setTimeout(() => {
+        document.querySelectorAll('.hidden').forEach(el => {
+          el.classList.add('show');
+        });
+      }, 1000);
+      
+      // Make navbar transparent at top
+      const navbar = document.querySelector('.navbar-fixed');
+      
+      if (window.scrollY === 0) {
+        navbar.style.backgroundColor = 'transparent';
+        navbar.style.boxShadow = 'none';
+      }
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.style.backgroundColor = 'white';
+          navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        } else {
+          navbar.style.backgroundColor = 'transparent';
+          navbar.style.boxShadow = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
